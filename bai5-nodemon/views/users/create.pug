@@ -1,0 +1,13 @@
+h1 Create User 
+form(action="/users/create" method="POST")
+    label Name
+    input(type="text" name="name")
+
+    label Age
+    - var n = 1;
+    select(name="age")
+        while n < 21
+            option(value=n)= n++
+    
+    button Create
+    
