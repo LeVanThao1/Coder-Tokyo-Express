@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const userController = require('../controllers/user.controller')
-
-const db = require('../db');
+const userController = require('../controllers/user.controller');
 
 router.get('/', userController.index);
 
