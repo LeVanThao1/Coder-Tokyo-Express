@@ -19,7 +19,6 @@ app.get('/users/search', (req, res) => {
 });
 app.get('/users/create', (req, res) => res.render('users/create'));
 app.post('/users/create', (req, res) => {
-    let data = req.body;
     let user = {
         id: users.length,
         name: req.body.name,
