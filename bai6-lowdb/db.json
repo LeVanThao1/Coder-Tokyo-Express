@@ -56,6 +56,13 @@
       "id": "54bX4srq",
       "name": "My-Website",
       "age": "1"
+    },
+    {
+      "id": "CAMBl5Dt",
+      "name": "Lý Hoài Nam",
+      "age": "1",
+      "email": "levanthao12412332@gmail.com",
+      "password": "fcea920f7412b5da7be0cf42b8c93759"
     }
   ]
 }

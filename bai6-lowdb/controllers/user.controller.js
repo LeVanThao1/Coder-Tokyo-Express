@@ -1,4 +1,6 @@
 const shortid = require('shortid');
+const md5 = require('md5');
+
 const db = require('../db');
 
 const index = (req, res) => res.render('users/index', { users: db.get('users').value() });
@@ -15,7 +17,9 @@ const postCreate =  (req, res) => {
     let data = {
         id: shortid.generate(),
         name: req.body.name,
-        age: req.body.age
+        age: req.body.age,
+        email: req.body.email,
+        password: md5(req.body.password)
     }
     db.get('users').push(data).write();
     res.redirect('/users');
@@ -24,7 +28,6 @@ const postCreate =  (req, res) => {
 const getUser = (req, res) => {
     let id = req.params.id;
     let user = db.get('users').find({ id: id }).value();
-    console.log(user);
     res.render('users/user', {user: user});
 };
 

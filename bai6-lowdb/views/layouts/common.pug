@@ -30,8 +30,13 @@ html
                 form(action="/search" method="GET" class="form-inline my-2 my-lg-0")
                     input(class="form-control mr-sm-2" type="search" name="keySearch" placeholder="Search" aria-label="Search")
                     button(class="btn btn-outline-success my-2 my-sm-0" type="submit") Search
-                button(class="btn btn-outline-success ml-2 " type="button") Login
-                button(class="btn btn-outline-success" type="button") Sign up
+                if !user
+                    a(href="/auth/login")
+                        button(class="btn btn-outline-success ml-2 mr-2" type="button") Login
+                    a(href="/users/create")
+                        button(class="btn btn-outline-success" type="button") Sign up
+                else 
+                    p user.name
         
         .container
             block content

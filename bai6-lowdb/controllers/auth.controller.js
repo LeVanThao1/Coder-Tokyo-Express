@@ -1,9 +1,12 @@
+const md5 = require('md5');
+
 const db = require('../db');
+
 const login = (req, res) => res.render('login');
 
 const checkLogin = (req, res) => {
     let email = req.body.email;
-    let password = req.body.password;
+    let password = md5(req.body.password);
     let user = db.get('users').find({ email }).value();
     if (!user) {
         res.render('login', {
