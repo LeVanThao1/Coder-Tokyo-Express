@@ -22,8 +22,8 @@ const checkLogin = (req, res) => {
         });
         return;
     }
-    res.cookie('email', email)
-        .cookie('password', password)
+    res.cookie('email', email, { signed: true })
+        .cookie('password', password, { signed: true })
         .redirect('/users');
 }
 
