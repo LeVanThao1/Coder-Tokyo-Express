@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const port = 3001;
 const userRoute = require('./routes/user.route');
+const productRoute = require('./routes/product.route');
 const cookieParser = require('cookie-parser');
 const authMiddleware = require('./middlewares/auth.middleware');
 const authRoute = require('./routes/auth.route');
@@ -18,6 +19,7 @@ app.use(express.static('public'));
 app.get('/', authMiddleware.requireAuth, (req, res) => res.render('index', {name: "Lê Văn Thảo"}));
 
 app.use('/users', userRoute);
+app.use('/products', productRoute);
 app.use('/', authRoute);
 
 app.listen(port, () => console.log('Server listen on port ' + port));
