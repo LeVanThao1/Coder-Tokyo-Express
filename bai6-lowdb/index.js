@@ -14,7 +14,7 @@ app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 app.use(express.static('public'));
 
-app.get('/', (req, res) => res.render('index', {name: "Lê Văn Thảo"}));
+app.get('/', authMiddleware.requireAuth, (req, res) => res.render('index', {name: "Lê Văn Thảo"}));
 
 app.use('/users', userRoute);
 app.use('/', authRoute);
