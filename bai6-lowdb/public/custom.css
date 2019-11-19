@@ -20,3 +20,8 @@ a.btn {
     font-weight: bold;
     color: darkred;
 }
+
+li.page-item.current > a {
+    background: red !important;
+    color: white !important;
+}

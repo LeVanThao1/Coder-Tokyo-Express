@@ -24,7 +24,7 @@ const checkLogin = (req, res) => {
     }
     res.cookie('email', email, { signed: true })
         .cookie('password', password, { signed: true })
-        .redirect('/users');
+        .redirect('/products');
 }
 
 module.exports = {

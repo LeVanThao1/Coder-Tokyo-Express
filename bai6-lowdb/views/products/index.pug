@@ -16,3 +16,35 @@ block content
                     p.card-text= product.description
                     p.float-left.mt-3.price= product.price
                     a.float-right.btn.btn-primary.mt-1(href='#') Buy
+    nav.float-right(aria-label='Page navigation example')
+        ul.pagination
+            li.page-item
+                a.page-link(href='/products?currentPage=1', action="/products"  method="GET") &laquo;
+            if currentPage > 1
+                li.page-item
+                    if currentPage < pages
+                        - var tam = currentPage;
+                        - var pre = tam-1
+                        a.page-link(href='/products?currentPage='+ pre, action="/products"  method="GET") &lt;   
+            - var i = currentPage - (range/2 + 1) + 1;
+            - var n = currentPage + (range/2 - 1);
+            if i <= 1
+                - var i = 1
+            if n > pages
+                - var n= pages
+            if n < range
+                - var n = range
+            while i <= n
+                if i==currentPage
+                    li.page-item.current
+                        a.page-link(href='/products?currentPage='+ i, action="/products" method="GET")=i++
+                else
+                    li.page-item
+                        a.page-link(href='/products?currentPage='+ i, action="/products" method="GET")=i++ 
+            if currentPage < pages - 1
+                li.page-item
+                    - var tamp = currentPage
+                    - var next = tamp + 1
+                    a.page-link(href='/products?currentPage='+ next, action="/products" method="GET") &gt;
+            li.page-item
+                a.page-link(href='/products?currentPage=' + pages, action="/products" method="GET") &raquo;
