@@ -34,7 +34,8 @@ html
                 i(class="material-icons") face
                 a(href="/users/"+ user.id)
                     b(class="my-2 mr-3 font-size-6 text-dark")= user.name
-                button(class="btn btn-outline-success my-2 my-sm-0" type="button") Log out
+                a(href="/logout")
+                    button(class="btn btn-outline-success my-2 my-sm-0" type="button") Log out
             else 
                 a(href="/auth/login")
                     button(class="btn btn-outline-success ml-2 mr-2" type="button") Login
@@ -44,5 +45,4 @@ html
         .container
             block content
         
-        script(src="https://code.jquery.com/jquery-1.11.1.js")
         script(src='handle.js')

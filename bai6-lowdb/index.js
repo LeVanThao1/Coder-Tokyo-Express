@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 app.use(express.static('public'));
 
 app.get('/', authMiddleware.requireAuth, (req, res) => res.render('index', {name: "Lê Văn Thảo"}));
-
+app.get('/logout', (req, res) => res.clearCookie('email').clearCookie('password').render('login'));
 app.use('/users', userRoute);
 app.use('/products', productRoute);
 app.use('/', authRoute);

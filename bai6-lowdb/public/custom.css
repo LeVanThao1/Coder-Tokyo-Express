@@ -12,6 +12,9 @@ p.card-text {
     width: 13.5rem ;
     height: 25px ;
 }
+.card-img-top {
+    height: 200px;
+}
 a.btn {
     padding: 8px 15px !important;
 }
