@@ -5,9 +5,9 @@ const db = require('../db');
 const login = (req, res) => res.render('login');
 
 const checkLogin = (req, res) => {
-    let email = req.body.email;
-    let password = md5(req.body.password);
-    let user = db.get('users').find({ email }).value();
+    const email = req.body.email;
+    const password = md5(req.body.password);
+    const user = db.get('users').find({ email }).value();
     if (!user) {
         res.render('login', {
             errors: [ 'User is not existed' ],
@@ -22,11 +22,9 @@ const checkLogin = (req, res) => {
         });
         return;
     }
-    res.cookie('email', email, { signed: true })
-        .cookie('password', password, { signed: true })
+    res.cookie('userId', user.id, { signed: true })
         .redirect('/products');
 }
-
 module.exports = {
     login,
     checkLogin

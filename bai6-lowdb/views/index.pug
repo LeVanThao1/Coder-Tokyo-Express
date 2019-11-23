@@ -1,6 +1,7 @@
 extends ./layouts/common
 
 block content
-    h1() Hello #{name}
+    h1() Hello 
+        span= user.name
     p(style="color: red") woking hard
     a(href="/users") Users

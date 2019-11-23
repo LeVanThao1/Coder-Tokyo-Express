@@ -1,16 +1,12 @@
 const db = require('../db');
 
 const requireAuth = (req, res, next) => {
-    if (!req.signedCookies.email) {
+    if (!req.signedCookies.userId) {
         res.redirect('/auth/login');
         return;
     }
-    const user = db.get('users').find({ email: req.signedCookies.email }).value();
+    const user = db.get('users').find({ id: req.signedCookies.userId }).value();
     if (!user) {
-        res.redirect('/auth/login');
-        return;
-    }
-    if (user.password !== req.signedCookies.password) {
         res.redirect('/auth/login');
         return;
     }
