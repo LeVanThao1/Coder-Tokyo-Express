@@ -34,7 +34,7 @@ const getCart = (req, res, next) => {
 const deleteCart = (req, res, next) => {
     const productId = req.params.productId;
     const sessionId = req.signedCookies.sessionId;
-    db.get('sessions').find({ id: sessionId }).get('cart').unset(productId).value();
+    db.get('sessions').find({ id: sessionId }).get('cart').unset(productId).write();
     res.redirect('/cart');
 }
 

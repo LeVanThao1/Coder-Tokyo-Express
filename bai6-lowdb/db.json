@@ -72,14 +72,17 @@
       "image": "https://loremflickr.com/320/240",
       "description": "eu interdum eu tincidunt in leo maecenas pulvinar lobortis est",
       "price": "$9.51",
-      "amount": 1
+      "amount": 2,
+      "intoMoney": 19.02
     },
     {
       "id": "7d91f190-eab6-4757-852c-5f3b63f7ef61",
       "name": "Wine - Red, Antinori Santa",
       "image": "https://loremflickr.com/320/240",
       "description": "eros viverra eget congue eget semper rutrum nulla nunc purus",
-      "price": "$2.43"
+      "price": "$2.43",
+      "amount": 2,
+      "intoMoney": 4.86
     },
     {
       "id": "fa84635b-3384-4fab-8147-3429c3c2ba32",
@@ -871,6 +874,12 @@
       "cart": {
         "fa84635b-3384-4fab-8147-3429c3c2ba32": 3,
         "de553c36-a4c4-40f0-a024-cf36d5a676dd": 1
+      }
+    },
+    {
+      "id": "Sk-y_6_g",
+      "cart": {
+        "7d91f190-eab6-4757-852c-5f3b63f7ef61": 2
       }
     }
   ]
