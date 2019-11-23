@@ -7,15 +7,17 @@ block content
             input(class="form-control mr-sm-2" type="search" name="keySearch" placeholder="Search" aria-label="Search")
             button(class="btn btn-primary my-2 my-sm-0" type="submit") Search
     div.mb-4(class="clearfix")
-    .listproduct.d-flex.flex-row.justify-content-between.flex-wrap
-        each product in products
-            .card.mb-3(style='width: 16rem;')
-                img.card-img-top(src=product.image, alt='...')
-                .card-body.pb-10
-                    h5.card-title= product.name
-                    p.card-text= product.description
-                    p.float-left.mt-3.price= product.price
-                    a.float-right.btn.btn-primary.mt-1(href='#') Buy
+    .container
+        .row
+            each product in products
+                .col-sm-6.col-md-3
+                    .card
+                        img.card-img-top(src=product.image, alt='...')
+                        .card-body.pb-10
+                            h5.card-title= product.name
+                            p.card-text= product.description
+                            p.float-left.mt-3.price= product.price
+                            a.float-right.btn.btn-primary.mt-1(href='/cart/add' + product.id) Add to Cart
     nav.float-right(aria-label='Page navigation example')
         ul.pagination
             li.page-item

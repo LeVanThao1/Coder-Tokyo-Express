@@ -1,0 +1,45 @@
+extends ./layouts/common
+
+block content 
+    .container
+        table#cart.table.table-hover.table-condensed
+            thead
+                tr
+                    th(style='width:60%') Product Name
+                    th(style='width:10%') Price
+                    th(style='width:8%') Amount
+                    th.text-center(style='width:12%') Into Money
+                    th(style='width:10%')
+            tbody
+                each product in products
+                    tr
+                        td(data-th='Product')
+                            .row
+                                .col-sm-2.hidden-xs
+                                    img.img-responsive(src=product.image, alt=product.name, width='100')
+                                .col-sm-10
+                                    h4.pl-4.nomargin=product.name
+                                    p.pl-4=product.description
+                        td(data-th='Price')= product.price
+                        td(data-th='Quantity')
+                            input.form-control.text-center(value=product.amount, type='number')
+                        td(data-th="Subtotal" class="text-center")= product.intoMoney 
+                        td.actions(data-th='')
+                            button.btn.btn-info.btn-sm
+                                i.fa.fa-edit
+                            a(href="/cart/delete" + product.id)
+                                button.btn.btn-danger.btn-sm
+                                    i.fa.fa-trash-o
+            tfoot
+                tr
+                    td
+                        a.btn.btn-warning.fot(href='/products')
+                            i.fa.fa-angle-left &nbsp; Continue shopping 
+                    td.hidden-xs(colspan=2) Total  
+                    td.hidden-xs.text-center= total 
+                    td
+                        a.btn.btn-success.btn-block(href='/products') Pay &nbsp;
+                            i.fa.fa-angle-right
+
+
+

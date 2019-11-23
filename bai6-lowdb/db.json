@@ -71,7 +71,8 @@
       "name": "Salt - Sea",
       "image": "https://loremflickr.com/320/240",
       "description": "eu interdum eu tincidunt in leo maecenas pulvinar lobortis est",
-      "price": "$9.51"
+      "price": "$9.51",
+      "amount": 1
     },
     {
       "id": "7d91f190-eab6-4757-852c-5f3b63f7ef61",
@@ -85,14 +86,18 @@
       "name": "Nut - Almond, Blanched, Whole",
       "image": "https://loremflickr.com/320/240",
       "description": "dictumst etiam faucibus cursus urna ut tellus nulla ut erat",
-      "price": "$8.73"
+      "price": "$8.73",
+      "amount": 2,
+      "intoMoney": 17.46
     },
     {
       "id": "16b5d432-58f3-4f6f-b119-294755fa00d2",
       "name": "Ecolab - Solid Fusion",
       "image": "https://loremflickr.com/320/240",
       "description": "mauris laoreet ut rhoncus aliquet pulvinar sed nisl nunc rhoncus",
-      "price": "$1.22"
+      "price": "$1.22",
+      "amount": 1,
+      "intoMoney": 1.22
     },
     {
       "id": "f48d0f65-95e1-4643-bc61-9fdf09a545eb",
@@ -847,6 +852,26 @@
       "description": "412313",
       "id": "DERT7PTY",
       "image": "uploads/9647c0a87595b2676b9e87c09c758706"
+    }
+  ],
+  "sessions": [
+    {
+      "id": "feCYD29p"
+    },
+    {
+      "id": "EEJBUvdE",
+      "cart": {
+        "fa84635b-3384-4fab-8147-3429c3c2ba32": 3,
+        "de553c36-a4c4-40f0-a024-cf36d5a676dd": 1,
+        "b7fb7859-ec8d-47cf-935c-704f237dde44": 1
+      }
+    },
+    {
+      "id": "pEA5RKY8",
+      "cart": {
+        "fa84635b-3384-4fab-8147-3429c3c2ba32": 3,
+        "de553c36-a4c4-40f0-a024-cf36d5a676dd": 1
+      }
     }
   ]
 }
