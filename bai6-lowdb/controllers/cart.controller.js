@@ -19,16 +19,21 @@ const getCart = (req, res, next) => {
     const products = [];
     let total = 0;
     for (const key in listIdProducts) {
-        const product = db.get('products').find({ id: key }).value();
-        if (product) {
-            product.amount = listIdProducts[key];
-            const price = parseFloat(product.price.split('').slice(1).join(''));
-            product.intoMoney = product.amount * price;
+        const getProduct = db.get('products').find({ id: key }).value();
+        if (getProduct) {
+            const product = {
+                id: key,
+                name: getProduct.name,
+                price: parseFloat(getProduct.price.split('').slice(1).join('')),
+                description: getProduct.description,
+                amount: listIdProducts[key],
+                intoMoney: listIdProducts[key] * parseFloat(getProduct.price.split('').slice(1).join('')).toFixed(2)
+            }
             total += product.intoMoney;
             products.push(product);
         }
     }
-    res.render('cart', { products, total });
+    res.render('cart', { products, total: parseFloat(total.toFixed(2)) });
 }
 
 const deleteCart = (req, res, next) => {
