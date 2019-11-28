@@ -6,7 +6,7 @@ const postLogin = (req, res, next) => {
     if (!req.body.password) {
         errors.push("Phone is required");
     }
-    if (errors.length) {
+    if (errors.length > 0) {
         res.render('login', { errors, values: req.body });
         return;
     }

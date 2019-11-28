@@ -1,25 +1,28 @@
-const shortid = require('shortid');
-const db = require('../db');
+const Session = require('../models/session.model')
 
-const sessionId = (req, res, next) => {
-    if (req.signedCookies.userId) {
-        const session = db.get('sessions').find({userId: req.signedCookies.userId}).value();
-        if (!session) {
-            const sessionId = shortid.generate();
-            res.cookie('sessionId', sessionId, { signed: true });
-            db.get('sessions').push({ id: sessionId, userId: req.signedCookies.userId }).write();
-        } else {
-            res.cookie('sessionId', session.id, { signed: true });
+const generateSession = async (req, res, next) => {
+    try {
+        if (!req.signedCookies.sessionId) {
+            const getSession = await Session.findOne({ userId: req.signedCookies.userId }).lean();
+            if (!getSession) {
+                const createSession = await Session.create({ userId: req.signedCookies.userId });
+                res.cookie('sessionId', createSession._id, { signed: true });
+            } else {
+                res.cookie('sessionId', getSession._id, { signed: true });
+            }
+            next();
         }
+        const session = await Session.findOne({ _id: req.signedCookies.sessionId }).lean();
+        if (!session) {
+            res.redirect('/auth/login');
+            return;
+        }
+        next();
+    } catch (e) {
+        next(e);
     } 
-    if (!req.signedCookies.sessionId) {
-        const sessionId = shortid.generate();
-        res.cookie('sessionId', sessionId, { signed: true });
-        db.get('sessions').push({ id: sessionId }).write();
-    }
-    next();
 }
 
 module.exports = {
-    sessionId
+    generateSession
 }

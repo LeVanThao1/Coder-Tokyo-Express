@@ -27,7 +27,7 @@ block content
                         td.actions(data-th='')
                             button.btn.btn-info.btn-sm
                                 i.fa.fa-edit
-                            a(href="/cart/delete" + product.id)
+                            a(href="/cart/delete:" + product.id +"?amount="+ product.amount)
                                 button.btn.btn-danger.btn-sm
                                     i.fa.fa-trash-o
             tfoot

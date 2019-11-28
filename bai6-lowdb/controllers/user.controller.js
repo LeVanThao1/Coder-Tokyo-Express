@@ -1,34 +1,58 @@
-const shortid = require('shortid');
-const md5 = require('md5');
+const bcrypt = require('bcrypt-nodejs');
+const User = require('../models/user.model');
 
-const db = require('../db');
-
-const index = (req, res) => res.render('users/index', { users: db.get('users').value() });
+const index = async (req, res) => {
+    try {
+        const users = await User.find().lean();
+        return res.render('users/index', { users })
+            .status(200).json('get_listuser_successfully');
+    } catch (e) {
+        next(e);
+    }
+}
 
 const create = (req, res) => res.render('users/create');
 
-const search = (req, res) => {
-    let q = req.query.q;
-    let matchedUsers = db.get('users').value().filter(( user ) => user.name.toLowerCase().indexOf(q.toLowerCase()) !== -1);
-    res.render('users/index', { users: matchedUsers, q });
-};
-
-const postCreate =  (req, res) => {
-    let data = {
-        id: shortid.generate(),
-        name: req.body.name,
-        age: req.body.age,
-        email: req.body.email,
-        password: md5(req.body.password)
+const search = async (req, res) => {
+    try {
+        const username = req.query.username;
+        const matchedUsers = await User.find().lean() 
+        const users = matchedUsers.filter(( user ) => user.name.toLowerCase().indexOf(username.toLowerCase()) !== -1);
+        return res.render('users/index', { users , username });
+    } catch (e) {
+        next(e);
     }
-    db.get('users').push(data).write();
-    res.redirect('/users');
+    
 };
 
-const getUser = (req, res) => {
-    let id = req.params.id;
-    let user = db.get('users').find({ id: id }).value();
-    res.render('users/user', {user: user});
+const postCreate = async (req, res) => {
+    try {
+        const salt = bcrypt.genSaltSync('10');
+        const data = {
+            name: req.body.name,
+            age: req.body.age,
+            email: req.body.email,
+            password: bcrypt.hashSync(req.body.password, salt)
+        }
+        const user = await User.create(data);
+        return res.redirect('/users')
+            .status(200).json('create_user_successfully');    
+    } catch (e) {
+        next(e);
+    }
+    
+};
+
+const getUser = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const user = await User.findOne({ _id: id }).lean();
+        res.render('users/user', { user })
+        .status(200).json('get_listuser_successfully');
+        return; 
+    } catch (e) {
+        next(e);
+    }
 };
 
 module.exports = {

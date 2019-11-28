@@ -24,10 +24,10 @@ a.btn {
     color: darkred;
 }
 
-li.page-item.current > a {
+.current > a {
     background: red !important;
     color: white !important;
-    height: 20px !important;
+    /* height: 20px !important; */
 }
 
 /* css cart */

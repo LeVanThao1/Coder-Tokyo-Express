@@ -1,29 +1,32 @@
-const md5 = require('md5');
-
-const db = require('../db');
+const bcrypt = require('bcrypt-nodejs');
+const User = require('../models/user.model')
 
 const login = (req, res) => res.render('login');
 
-const checkLogin = (req, res) => {
-    const email = req.body.email;
-    const password = md5(req.body.password);
-    const user = db.get('users').find({ email }).value();
-    if (!user) {
-        res.render('login', {
-            errors: [ 'User is not existed' ],
-            values: req.body
-        });
-        return;
+const checkLogin = async (req, res) => {
+    try {
+        const email = req.body.email;
+        const user = await User.findOne({ email }).lean();
+        if (!user) {
+            res.render('login', {
+                errors: [ 'User is not existed' ],
+                values: req.body
+            });
+            return;
+        }
+        const isValiddatePassword = bcrypt.compareSync(req.body.password, user.password);
+        if (!isValiddatePassword) {
+            res.render('login', {
+                errors: [ 'Wrong password' ],
+                values: req.body
+            });
+            return;
+        }
+        res.cookie('userId', user._id, { signed: true });
+        res.redirect('/products');
+    } catch(e) {
+        next(e);
     }
-    if (user.password !== password) {
-        res.render('login', {
-            errors: [ 'Wrong password' ],
-            values: req.body
-        });
-        return;
-    }
-    res.cookie('userId', user.id, { signed: true })
-        .redirect('/products');
 }
 module.exports = {
     login,

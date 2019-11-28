@@ -17,8 +17,8 @@ block content
                             h5.card-title= product.name
                             p.card-text= product.description
                             p.float-left.mt-3.price= product.price
-                            a.float-right.btn.btn-primary.mt-1(href='/cart/add' + product.id) Add to Cart
-    nav.float-right(aria-label='Page navigation example')
+                            a.float-right.btn.btn-primary.mt-1(href='/cart/add' + product._id) Add to Cart
+    nav.float-right.mt-4(aria-label='Page navigation example')
         ul.pagination
             li.page-item
                 a.page-link(href='/products?currentPage=1', action="/products"  method="GET") &laquo;
